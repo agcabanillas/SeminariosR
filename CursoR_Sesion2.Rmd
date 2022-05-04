@@ -91,6 +91,7 @@ knitr::include_graphics("./images/tidyr_2.jpeg")
 ## Ejemplos{.smaller}
 
 ```{r, echo = TRUE, cache = TRUE}
+library(tidyverse)
 palmerpenguins:: penguins %>%
   group_by(species) %>% #Eligiendo la agrupación que nos interesa
   summarize(across(where(is.numeric), mean, na.rm = TRUE))
@@ -194,17 +195,17 @@ knitr::include_graphics("./images/lubridate_2.jpeg")
 
 ## 
 ```{r,  echo = FALSE,include = FALSE} 
-pdftools::pdf_convert("./images/data-visualization.pdf",format = "jpeg",pages = 1)
-pdftools::pdf_convert("./images/data-visualization.pdf",format = "jpeg",pages = 2)
+pdftools::pdf_convert("./images/data-visualization.pdf",format = "jpeg",pages = 1, filenames = "./images/data-visualization_1.jpeg")
+pdftools::pdf_convert("./images/data-visualization.pdf",format = "jpeg",pages = 2, filenames = "./images/data-visualization_1.jpeg")
 ```
 
 ```{r , echo = FALSE, out.width="100%"} 
-knitr::include_graphics("data-visualization_1.jpeg")
+knitr::include_graphics("./images/data-visualization_1.jpeg")
 ```
 
 ##  
 ```{r , echo = FALSE, out.width="100%"} 
-knitr::include_graphics("data-visualization_2.jpeg")
+knitr::include_graphics("./images/data-visualization_2.jpeg")
 ```
 
 ## Ejemplo 

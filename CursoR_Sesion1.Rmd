@@ -238,7 +238,7 @@ v2 <- c(10,11,12,13,14,15)
 array(c(v1,v2),dim = c(3,3,2))
 
 ```{r, echo = FALSE, out.width = "300px"}
-knitr::include_graphics("cube.png")
+knitr::include_graphics("./images/cube.png")
 ```
 
 
