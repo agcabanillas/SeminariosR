@@ -1,0 +1,56 @@
+---
+title: "RProjects y RMarkdown"
+author: Alejandra G.Cabanillas 
+output:  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+
+## Que son los *projects* de Rstudio?
+- Una manera de organizar tu *workflow*.
+- Están automáticamente asociados con el *working directory* de R.
+- Así que podemos dejar **setwd()** descansar en paz y evitar problemas de archivos que no están en su sitio. 
+
+
+<font size="4"> El [*tweet*](https://twitter.com/hadleywickham/status/940021008764846080) y el [*post*](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) que me convirtieron a este método.
+
+## Estructura
+Cada proyecto tiene su propio: 
+- *directory *
+- *workspace *
+- *history*
+- *source documents*  
+
+<font size="4">[Video](https://alexd106.github.io/intro2R/howto.html#rstudio_proj-vid) de como crear RStudio *Projects*. 
+
+## Ventajas
+- Los análisis de diferentes proyectos se mantienen completamente separados. 
+- Puedes tener abiertas varias sesiones de R a la vez sin que interfieran entre ellos. 
+- Las direcciones de los archivos se vuelven relativas en vez de absolutas. Lo que facilita trabajar en un informe desde varios ordenadores. 
+
+
+## Como crear un *Project* nuevo
+
+
+```{r, echo = FALSE, out.width = "300px"}
+knitr::include_graphics("new_proj.png")
+```
+
+
+```{r, echo = FALSE, out.width = "300px"}
+knitr::include_graphics("new_proj1.png")
+```
+
+## Que es RMarkdown? 
+
+## Todo lo que ya habeis aprendido en version CV
+- Programming Language: R
+- Exploratory Data Analysis tools: tidyverse
+- Dataviz tools: ggplot2
+- Programmatic reporting: RMarkdown
+
+<font size="4">[Source](https://twitter.com/charliejhadley/status/1516476148938649602)

@@ -1,0 +1,26 @@
+"0","pdftools::pdf_convert(""./images/rmarkdown.pdf"",format = ""jpeg"",pages = 1, filenames = ""./images/rmarkdown_1.jpeg"")"
+"2","Warning in sprintf(filenames, pages, format) :"
+"2","
+ "
+"2"," 2 arguments not used by format './images/rmarkdown_1.jpeg'
+"
+"1","Converting page 1 to ./images/rmarkdown_1.jpeg..."
+"1"," done!
+"
+"1","[1]"
+"1"," ""./images/rmarkdown_1.jpeg"""
+"1","
+"
+"0","pdftools::pdf_convert(""./images/rmarkdown.pdf"",format = ""jpeg"",pages = 2, filenames = ""./images/rmarkdown_2.jpeg"")"
+"2","Warning in sprintf(filenames, pages, format) :"
+"2","
+ "
+"2"," 2 arguments not used by format './images/rmarkdown_2.jpeg'
+"
+"1","Converting page 2 to ./images/rmarkdown_2.jpeg..."
+"1"," done!
+"
+"1","[1]"
+"1"," ""./images/rmarkdown_2.jpeg"""
+"1","
+"

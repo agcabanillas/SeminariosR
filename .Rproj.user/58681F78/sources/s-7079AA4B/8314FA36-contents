@@ -1,0 +1,467 @@
+---
+title: "Introducción a R"
+author: Alejandra G.Cabanillas 
+output: 
+   ioslides_presentation:
+    logo: ./images/MASTS-logo.jpg
+ 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('slide:not(.title-slide, .backdrop, .segue)').append('<footer label=\"@AlexGCabanillas\"></footer>');    
+    })
+</script>
+
+<style>
+  footer:after {
+    content: attr(label);
+    font-size: 12pt;
+    position: absolute;
+    bottom: 620px;
+    left: 710px;
+    line-height: 1.9;
+  }
+</style>
+
+
+## Primeros Pasos en R 
+
+- Instalar Rstudio. 
+- Utilizando *scripts* vs escribir en la consola. 
+- Para explorar que hace una función escribe **"?"** en la consola antes de.
+```{r, echo = TRUE, eval = FALSE}
+?mean() #Llama al servidor CRAN-R 
+```
+
+- Limpiar el *enviroment*. 
+```{r, echo = TRUE, eval = FALSE}
+rm(list=ls())# quitar objetos existentes de R
+```
+- *Working Directory*.
+```{r, echo = TRUE, eval = FALSE}
+getwd() # te enseña el directorio actual
+setwd() # te permite cambiar el directorio
+```
+<font size="4">Si utilizas proyectos, se hace automáticamente</font>
+
+## Creando variables {.smaller}
+
+Consejos en asignar nombres 
+
+- R es *case sensitive*. Escribir hola y HOLA no es lo mismo. 
+
+Ejemplos: 
+
+- variableA 
+- variable_a 
+- VarA 
+- var.a 
+
+Lo importante es ser consistente para que sea más fácil de leer y evitar palabras que R use por defecto. 
+
+## Tipos de variables
+
+Vectores  
+```{r, echo = TRUE}
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+```
+- Aquí **x** es nuestra variable.
+- " <- " le asigna un valor a esa variable .
+- "c" significa concatenar.
+
+```{r, echo = TRUE}
+x 
+```
+
+
+## Tipos de variables: Secuencias 
+- Usamos la función "seq()" para generar una secuencia:
+```{r, echo = TRUE}
+ seq(from = 1, to= 5, by= 0.5)
+```
+```{r, echo = TRUE}
+ seq(length= 10, from= 2 , by = 0.5)
+```
+- También se puede abreviar usando ":" 
+
+```{r, echo = TRUE}
+ 1:10
+``` 
+## Repeticiones
+- También la función "rep()" si queremos replicar un objecto. 
+```{r, echo = TRUE}
+rep(1:5, times=2)
+rep(1, times=5)
+a <- "hola"
+rep(a, 6)
+```
+
+## Vectores Logicos 
+Pueden ser: 
+
+- *TRUE, FALSE o NA* 
+
+Los operadores lógicos son: 
+
+- "< " menor 
+- "<=" menor o igual
+- "> " mayor
+- ">="  mayor o igual
+- "== " (exactamente igual) 
+- "!= " (no es igual) 
+
+## Vectores Logicos.2 
+Se utilizan condiciones para generarlos: 
+```{r, echo = TRUE}
+ 2 > 1 
+``` 
+O en combinación con un objeto previamente creado para ver cual parte cumple la condición: 
+```{r, echo = TRUE}
+temp <- x > 13
+temp
+``` 
+
+## Valores ausentes 
+- Cuando un espacio en un vector no esta ocupado el espacio se muestra como *NA*. 
+- Para ver cuando esto ocurre se usa: 
+```{r, echo = TRUE}
+ z <- c(1:3,NA)
+ind <- is.na(z)
+  ind
+``` 
+
+## Valores ausentes.2
+- El segundo tipo puede ser generado por valores que el ordenador no puede computar: 
+```{r, echo = TRUE}
+  0/0
+ Inf - Inf
+``` 
+- "is.na" resultara en un TRUE para ambos casos.
+
+## Character vectors
+
+- Básicamente para escribir con letras.
+- Tienen que estar dentro de **" "** para ser leídos correctamente. 
+```{r, echo = TRUE}
+  labs <- paste(c("X","Y"), 1:10, sep="")
+    labs
+``` 
+
+## Indices de vectores 
+
+Se utilizan indices para seleccionar partes de un objecto.
+
+Tenemos cuatro tipos: 
+
+- Vector lógico: solo selecciona los valores que cumplan la condición.
+```{r, echo = TRUE}
+  x[!is.na(x)]
+``` 
+
+## Indices de vectores .2
+
+- Vector de cantidades positivas(*of positive integral quantities*): selecciona los valores de las posiciones elegidas en orden ascendente.
+```{r, echo = TRUE}
+  x
+x[1:3]
+
+``` 
+
+## Indices de vectores .3
+
+- Vector de cantidades negativas (*of negative integral quantities*): selecciona los valores no incluidos en la opción anterior.
+```{r, echo = TRUE}
+  x
+x[-(1:3)]
+``` 
+
+## Indices de vectores .4
+
+- Vector de *character strings*: solo funciona si el objecto esta compuesto de nombres.
+```{r, echo = TRUE}
+fruit <- c(5, 10, 1, 20)
+names(fruit) <- c("orange", "banana", "apple", "peach")
+lunch <- fruit[c("apple","orange")]
+lunch
+``` 
+
+## Indices de vectores: Usos 
+
+- Puedes asignarle un valor nuevo a la parte del objecto seleccionada: 
+```{r, echo = TRUE}
+x[2]<- NA
+x[is.na(x)] <- 0
+x
+``` 
+ Esto es muy útil si tienes datos que faltan y necesitas hacer algún calculo. Ya que la mayoría de las funciones no pueden procesar datos con **NA**. 
+ 
+## Otros tipos de objetos 
+
+- *matrix* : vectores indexados por uno o mas indices. 
+```{r, echo = TRUE}
+matrix(3,1,3)
+``` 
+- *data frame*s: como una matriz pero cada columna puede tener un tipo distinto de datos.
+```{r, echo = TRUE}
+data.frame(matrix(3,1,3))
+``` 
+
+## Clase de un objeto 
+
+La clase de un objeto determina que puedes hacer con ello. 
+También es de las causas mas comunes de errores. 
+
+Algunos ejemplos: 
+
+ - *"numeric" *
+ - *"logical" *
+ - *"character"* 
+ - *"list" *
+ - *"factor"  *
+
+
+## Arrays {.columns-2 .smaller}
+
+- Una manera de juntar matrices. 
+- Si un cuadrado en un papel es una matriz, un cubo hecho de muchos cuadrados es un *array *
+```{r, echo = TRUE}
+v1 <- c(5,9,3)
+v2 <- c(10,11,12,13,14,15)
+array(c(v1,v2),dim = c(3,3,2))
+
+```{r, echo = FALSE, out.width = "300px"}
+knitr::include_graphics("cube.png")
+```
+
+
+## Index en una matrix
+
+Como seleccionar solo una parte de una *matrix*: 
+```{r, echo = TRUE}
+a <- matrix(1:4,2,2)
+a
+a[2,2]
+``` 
+## Index en un array
+
+Seleccionar de un *array* es lo mismo pero con una dimensión mas: 
+```{r, echo = TRUE}
+v1 <- c(5,9,3)
+v2 <- c(10,11,12,13,14,15)
+b <- array(c(v1,v2),dim = c(3,3,2))
+b[1,2,1]
+``` 
+
+## Trabajando con matrices
+
+ R tiene muchas funciones base para trabajar con matrices: 
+- "nrow()" y "ncol()" te dan el numero de filas y columnas: 
+```{r, echo = TRUE}
+a <- matrix(1:4,2,2)
+nrow(a)
+ncol(a)
+``` 
+
+## Construyendo objectos 
+
+Si quieres crear una matriz a partir de otros objetos: 
+- Como unir como columnas: 
+```{r, echo = TRUE, warning = FALSE}
+v1 <- c(5,9)
+v2 <- c(10,11,12)
+cbind(v1,v2)
+``` 
+Un detalle importante es que cuando hay diferencia de tamaños la mas pequeña repetirá la información. 
+
+
+## Construyendo objectos .2
+- Para unir como filas: 
+```{r, echo = TRUE}
+v1 <- c(5,9,3)
+v2 <- c(10,11,12,13,14,15)
+rbind(v1,v2)
+``` 
+
+## Listas{.smaller}
+
+- Es un objecto de R compuesto de un grupo ordenado de componentes. 
+
+```{r, echo = TRUE}
+lst <- list(name="Fred", wife="Mary", no.children=3,
+child.ages=c(4,7,9))
+lst
+``` 
+- Los componentes siempre están numerados y ese numero se usa para localizarlos. 
+
+## Listas .2
+En una lista los siguientes son equivalentes: 
+```{r, echo = TRUE}
+lst <- list(name="Fred", wife="Mary", no.children=3,
+child.ages=c(4,7,9))
+lst[["name"]] 
+lst$name
+```
+
+## Data Frames
+Los componentes deben ser: 
+
+- vectores (numérico, character, lógico)
+- factores 
+- matrices numéricas
+- listas
+- otros *data frames *
+
+## Data Frames.2
+- Puedes crear un *data frame* usando otros vectores
+```{r, echo = TRUE}
+a <- rnorm(3,4, 10)
+b <- rnorm(3,4)
+df <- data.frame(x = a, y = b)
+df
+```
+
+- <font size="4">
+- Muy útil para manipular datos y unir varios sets de datos distintos. 
+- También puedes usar **"as.data.frame"** para convertir una *matrix* a un *data frame *.
+</font>
+
+## Data Frames.3
+
+- El uso de "attach() y detach()" es muy común pero en mi opinión suele dar lugar a errores y complica la reproducibilidad de un código. 
+- Siempre comprueba las dimensiones de tu *data.frame*, es muy fácil que cometer errores de importación y tener alguna columna o fila importadad incorrectactamente.
+
+
+## Functions
+Como crear tu propia función. Necesitas:
+
+- El nombre de la función (elige algo corto pero que indique que hace.
+- la función en R es **"function(...){}"**.
+- **(...)** indica la información sobre la que se va a aplicar la función. 
+- **{}** dentro de estos se escribe que va a hacer la función.
+- **"return()"** es el resultado que nos dará la función.
+
+## Functions.2
+```{r, echo = TRUE}
+even_or_odd <- function(n) {
+ if (n%%2 == 0) # division with remainder
+ {value = "even"}
+ else
+ {value = "odd"}
+ return(value) # this is either “even” or “odd”
+}
+even_or_odd(3)
+
+```
+
+## Loops 
+Una operación se va a repetir un numero asignado de veces (**i** es comúnmente usado).
+Los tipos mas usados son: 
+
+- **for(){} **
+Trabaja dentro de una cantidad definida de pasos.
+- **while(){}**
+Funciona hasta que la condición deja de cumplirse.
+
+
+## For loops 
+<div class="columns-2">
+Sintaxis: 
+```{r, echo = TRUE, eval = FALSE}
+for (index in values) {
+  commands
+  }
+```
+- **"values"**aquí define que valores quieres que el indice tome.
+
+```{r, echo = TRUE}
+for (i in 1:3) {
+  print(i)
+  }
+```
+- **"print()" **es una función predefinida que hace que el objecto sea mostrado en la consola.
+</div>
+
+## For loops.2
+Puedes definir los valores individualmente:
+
+```{r, echo = TRUE}
+for (qq in c(7,2.1,pi)) {
+  print(qq)
+  }
+```
+
+## While loops
+Sintaxis: 
+```{r, echo = TRUE, eval = FALSE}
+while(logical statement){
+  funcion a realizar
+}
+```
+
+```{r, echo = TRUE}
+i <- 0
+while (i < 3) {
+i = i + 1
+print(i)
+}
+```
+
+## if Statements
+Ejecutar un comando solo cuando se cumple una condición lógica. 
+Sintaxis: 
+```{r, echo = TRUE, eval = FALSE}
+if (condition) {commands}
+o 
+if (condition) {commands} 
+  else {other commands}
+```
+## if Statements.2 {.columns-2 .smaller} 
+
+```{r, echo = TRUE}
+x <- -5
+if(x > 0){
+  print("Non-negative number")
+} else {
+  print("Negative number")
+  }
+
+```
+```{r, echo = FALSE, out.width = "400px"} 
+knitr::include_graphics("./images/r-if-statement.jpg")
+```
+
+
+## Comentarios sobre parentesis 
+Cada tipo de paréntesis tiene un uso distinto:
+
+- **[]** indica que estas seleccionando algo (*subsetting*)
+- **{}** define que estas dentro de como trabaja una función o un *loop *
+- **()** define los objectos sobre los que una función esta siendo aplicada o para usos de operaciones aritméticas
+
+## Comentarios en indentacion {.smaller}
+- La indentación no tiene efectos en si el código funciona o no en R 
+- Pero facilita la lectura cuando aumenta la complejidad. 
+
+```{r, echo = TRUE}
+i <- 0
+while (i < 3) {
+  i = i + 1
+  print(i)
+}
+```
+- Al estar indentado el contenido del *loop* es mas claro que esta dentro y que no. 
+
+## Recomendacion de textos 
+- [*A sufficient Introduction to R*](https://dereksonderegger.github.io/570L/1-introduction.html)
+- Venables, William N., David M. Smith, and R Development Core Team. "An introduction to R." (2009). 
+- Getting Started with R: An Introduction for Biologists. Andrew Beckerman, Dylan Childs, and Owen Petchey.
+- R Global Ladies: https://www.youtube.com/c/LatinR 
+
