@@ -1,9 +1,11 @@
 ---
 title: "Tidyverse y Ggplot"
-author: Alejandra G.Cabanillas 
-output: 
-   ioslides_presentation:
+author: "Alejandra G.Cabanillas"
+output:
+  ioslides_presentation:
     logo: ./images/MASTS-logo.jpg
+  slidy_presentation: default
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -350,67 +352,15 @@ bmass_hist <- ggplot(data = penguins, aes(x = body_mass_g)) +
 mass_hist
 ```
 
-## Graficas animadas 
-
-```{r,warning=FALSE, echo = FALSE, out.width="100%", cache=TRUE} 
-
-# Get data:
-library(gapminder)
- 
-# Charge libraries:
-library(ggplot2)
-library(gganimate)
- 
-# Make a ggplot, but add frame=year: one image per year
-anim <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent)) +
-  geom_point() +
-  scale_x_log10() +
-  theme_bw() +
-  # gganimate specific bits:
-  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') 
-
-anim +
-  transition_time(year) +
-  ease_aes('linear')
-
-anim_save("271-ggplot2-animated-gif-chart-with-gganimate1.gif")
-```
-
-<font size="4">[Source](https://www.r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html)</font>
-
-
-## 
-
-```{r,warning=FALSE, echo = FALSE, out.width="100%", cache=TRUE} 
-# Get data:
-library(gapminder)
- 
-# Charge libraries:
-library(ggplot2)
-library(gganimate)
- 
-# Make a ggplot, but add frame=year: one image per year
-ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
-  geom_point(alpha = 0.7, show.legend = FALSE) +
-  scale_colour_manual(values = country_colors) +
-  scale_size(range = c(2, 12)) +
-  scale_x_log10() +
-  facet_wrap(~continent) +
-  # Here comes the gganimate specific bits
-  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
-  transition_time(year) +
-  ease_aes('linear')
-
-# Save at gif:
-anim_save("271-ggplot2-animated-gif-chart-with-gganimate2.gif")
-```
-<font size="4">[Source](https://www.r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html)</font>
 
 ## Ejemplo de combinar ambos
 
 ```{r,warning=FALSE, echo = FALSE, out.width="100%", cache=TRUE} 
-
+library(tidyverse)
+library(ggplot2)
+library(palmerpenguins)
 library(ggdist)      ## add uncertainity visualizations to ggplot2
+library(glue)
 
 theme_set(theme_classic()) 
 
