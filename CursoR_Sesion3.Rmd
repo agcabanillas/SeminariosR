@@ -1,7 +1,8 @@
 ---
 title: "RProjects y RMarkdown"
-author: Alejandra G.Cabanillas 
-output:  
+author: "Alejandra G.Cabanillas"
+output:
+  beamer_presentation: default
   ioslides_presentation:
     logo: ./images/MASTS-logo.jpg
 ---
