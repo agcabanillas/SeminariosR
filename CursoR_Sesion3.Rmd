@@ -58,9 +58,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Como crear un *Project* nuevo
 
 ```{r,  figures-side, echo = FALSE,fig.show="hold", out.width="50%"}
-knitr::include_graphics("new_proj.png")
+knitr::include_graphics(("./images/new_proj.png"))
 
-knitr::include_graphics("new_proj1.png")
+knitr::include_graphics("./images/new_proj1.png")
 ```
 
 
@@ -119,6 +119,12 @@ tinytex::install_tinytex()
 ``` 
 
 <font size="4">[Aquí](https://tug.org/TUGboat/Contents/contents40-1.html)  puedes ver los detalles técnicos de  *TinyTeX* y [aquí](https://yihui.org/tinytex/faq/) los FAQ.</font> 
+
+## 
+```{r , echo = FALSE, out.width="100%"} 
+knitr::include_graphics("./images/rmarkdown_wizards.png")
+```
+
 
 ## ¿Como funciona?
 
@@ -248,9 +254,25 @@ knitr::include_graphics("./images/chunks.png")
 knitr::include_graphics("./images/chunks.png")
 ```
 
+## Que pasa si quieres aplicar un *script* externo? 
+
+- Se utiliza de la misma manera que en un archivo **.R**
+```{r, eval = FALSE, echo= TRUE}
+source("your-script.R", local = knitr::knit_global())
+# or sys.source("your-script.R", envir = knitr::knit_global())
+```
+
+
+
 ## Programmatic reporting
 - Cuando todo lo anterior es aplicado dentro de un documento tenemos lo que se conoce como *Programmatic reporting*.
 - Un documento que se actualiza fácilmente cuando cambian los datos que se han utilizado para generarlo. 
+
+## 
+```{r,  echo = FALSE, out.width="100%"} 
+knitr::include_graphics("./images/rmarkdown_translation.png")
+```
+<font size="4">[Source](https://epirhandbook.com/en/reports-with-r-markdown.html)</font> 
 
 
 ## Todo lo que ya habeis aprendido en version CV
@@ -264,6 +286,7 @@ knitr::include_graphics("./images/chunks.png")
 
 
 ## Referencias 
+- [Reports en R Markdown](https://epirhandbook.com/en/reports-with-r-markdown.html)
 - [R Markdown for Scientists](https://rmd4sci.njtierney.com/). Empieza aqui, tiene las explicacions breves y ejercicios.
 - [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) para todas las preguntas que se te puedan ocurrir. 
 - [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
